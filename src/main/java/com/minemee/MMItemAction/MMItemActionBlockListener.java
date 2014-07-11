@@ -57,6 +57,7 @@ public class MMItemActionBlockListener implements Listener {
 				
 				if(player.getItemInHand().getType().equals(Material.EYE_OF_ENDER))
 				{ 
+					event.setCancelled(true);
 					player.sendMessage("Redirecting you to a safe haven in 10 seconds!");
 					   			
 					new Timer().schedule(new TimerTask() {          
