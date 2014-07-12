@@ -1,4 +1,4 @@
-package com.minemee.MMItemAction;
+package com.minemee.mmitemaction;
 
 import java.util.logging.Logger;
 
