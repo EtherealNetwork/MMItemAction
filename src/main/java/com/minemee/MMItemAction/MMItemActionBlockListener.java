@@ -69,6 +69,13 @@ public class MMItemActionBlockListener implements Listener {
 					}, 10000);
 					         
 				}
+				if(player.getItemInHand().getType().equals(Material.BEDROCK))
+				{
+					player.setItemInHand(new ItemStack(Material.AIR));
+					World w = Bukkit.getServer().getWorld("world");
+					Location location = new Location(w, 1, -2, 1);
+					player.teleport(location);
+				}
 				
 			}	
 			
