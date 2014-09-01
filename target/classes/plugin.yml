@@ -1,3 +1,7 @@
 name: MMItemAction
-main: com.minemee.MMItemAction.MMItemAction
+main: com.minemee.mmitemaction.MMItemAction
 version: 0.1
+commands:
+   book:
+      description: Gives you a Minemee Book.
+      usage: /<book>
