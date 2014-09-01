@@ -18,7 +18,7 @@ public class MMItemActionJoin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e) {
 		
         Player player = e.getPlayer();		
-		//if(player.hasPlayedBefore()){ return; }
+		if(player.hasPlayedBefore()){ return; }
 		
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
         ItemStack eyeofender = new ItemStack(Material.EYE_OF_ENDER, 1);

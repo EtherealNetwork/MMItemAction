@@ -36,7 +36,7 @@ public class MMItemAction extends JavaPlugin {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("book")) { // If the player typed /basic then do the following...
+		if (cmd.getName().equalsIgnoreCase("book")) {
 
 	        ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
 
@@ -65,10 +65,7 @@ public class MMItemAction extends JavaPlugin {
 
 			return true;
 		} 
-//		else if (cmd.getName().equalsIgnoreCase("basic2")) {
-//			// dom something
-//			return true;
-//		}
+
 		return false;
 	}
 
