@@ -4,21 +4,45 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class MMItemActionBlockListener implements Listener {
 
+	@EventHandler
+	 public void onCreatureSpawn(CreatureSpawnEvent event)
+	 {
+	  if(event.getEntity() instanceof Zombie)
+	  {
+	   Zombie z = (Zombie)event.getEntity();
+	   ((LivingEntity)z).addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
+	  }
+	 }
+	
+	 @EventHandler
+	 public void onEntityCombust(EntityCombustEvent event){
+		 if(event.getEntity() instanceof Zombie){
+			 event.setCancelled(true);  
+		 }	  
+	 } 
+	
 	@EventHandler(priority = EventPriority.NORMAL) 
-	public void interactFood(PlayerInteractEvent event){
+	public void interactItem(PlayerInteractEvent event){
 
 		final Player player = event.getPlayer();
 
@@ -40,7 +64,7 @@ public class MMItemActionBlockListener implements Listener {
 						}
 		
 						if (player.getHealth() < 19) {
-							player.sendMessage("This bandage is working well!");
+							player.sendMessage(ChatColor.AQUA.toString() + "This bandage healed you.");
 		
 							if((player.getHealth() + 2.0d) > 20.0d){
 								player.setHealth(20.0d);
@@ -51,7 +75,7 @@ public class MMItemActionBlockListener implements Listener {
 		
 						}
 						else{
-							player.sendMessage("You wasted one bandage. You were already fine.");
+							player.sendMessage(ChatColor.AQUA.toString() + "You wasted one bandage. Your life was full.");
 						}
 					
 					}
@@ -68,7 +92,7 @@ public class MMItemActionBlockListener implements Listener {
 					final Location loc = player.getLocation();
 					final int x = loc.getBlockX();
 	
-					player.sendMessage("Trying to redirect you to a safe haven!");
+					player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.BLUE.toString() + "[ST] " + ChatColor.RESET.toString() + "Trying to redirect you to spawn. Stay still.");
 	
 					new Timer().schedule(new TimerTask() {          
 						@Override
@@ -77,13 +101,13 @@ public class MMItemActionBlockListener implements Listener {
 							final Location new_loc = player.getLocation();
 							
 							 if(health > player.getHealth()){
-								 player.sendMessage("Sorry, you can't escape battles.");
+								 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.BLUE.toString() + "[ST] " + ChatColor.RESET.toString() + "Sorry, you can't escape battles.");
 							 }
 							 else if(x != new_loc.getBlockX()){
-								 player.sendMessage("Sorry, you have to stay still.");
+								 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.BLUE.toString() + "[ST] " + ChatColor.RESET.toString() + "Sorry, you have to stay still.");
 							 }
 							 else{
-								 player.sendMessage("Redirecting you now!");
+								 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.BLUE.toString() + "[ST] " + ChatColor.RESET.toString() + "Redirecting you.");
 								 World w = Bukkit.getServer().getWorld("world");
 								 player.teleport(w.getSpawnLocation());
 							 }
@@ -109,7 +133,8 @@ public class MMItemActionBlockListener implements Listener {
 						final Location loc = player.getLocation();
 						final int x = loc.getBlockX();
 		
-						player.sendMessage("Trying to redirect you to your home!");
+						player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.GREEN.toString() + "[HT] " + ChatColor.RESET.toString() + "Trying to redirect you home. Stay still.");
+
 		
 						new Timer().schedule(new TimerTask() {          
 							@Override
@@ -118,13 +143,13 @@ public class MMItemActionBlockListener implements Listener {
 								final Location new_loc = player.getLocation();
 								
 								 if(health > player.getHealth()){
-									 player.sendMessage("Sorry, you can't escape battles.");
+									 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.GREEN.toString() + "[HT] " + ChatColor.RESET.toString() + "Sorry, you can't escape battles.");
 								 }
 								 else if(x != new_loc.getBlockX()){
-									 player.sendMessage("Sorry, you have to stay still.");
+									 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.GREEN.toString() + "[HT] " + ChatColor.RESET.toString() + "Sorry, you have to stay still.");
 								 }
 								 else{
-									 player.sendMessage("Redirecting you now!");
+									 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.GREEN.toString() + "[HT] " + ChatColor.RESET.toString() + "Redirecting you.");
 									 player.teleport(player.getBedSpawnLocation());
 								 }
 								 
@@ -134,7 +159,7 @@ public class MMItemActionBlockListener implements Listener {
 					} 
 					else 
 					{
-						player.sendMessage("You have no bed set!");
+						 player.sendMessage(ChatColor.ITALIC.toString() + ChatColor.GREEN.toString() + "[HT] " + ChatColor.RESET.toString() + "You have no bed set.");
 					}					
 				}
 			}

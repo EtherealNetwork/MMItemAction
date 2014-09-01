@@ -1,6 +1,5 @@
 package com.minemee.mmitemaction;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,7 +9,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class MMItemActionJoin implements Listener {
 
