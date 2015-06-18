@@ -27,18 +27,18 @@ public class MMItemActionBlockListener implements Listener {
 	@EventHandler
 	 public void onCreatureSpawn(CreatureSpawnEvent event)
 	 {
-	  if(event.getEntity() instanceof Zombie)
-	  {
-	   Zombie z = (Zombie)event.getEntity();
-	   ((LivingEntity)z).addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
-	  }
+	  //if(event.getEntity() instanceof Zombie)
+	  //{
+	  // Zombie z = (Zombie)event.getEntity();
+	  // ((LivingEntity)z).addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
+	  //}
 	 }
 	
 	 @EventHandler
 	 public void onEntityCombust(EntityCombustEvent event){
-		 if(event.getEntity() instanceof Zombie){
-			 event.setCancelled(true);  
-		 }	  
+	//	 if(event.getEntity() instanceof Zombie){
+	//		 event.setCancelled(true);  
+	//	 }	  
 	 } 
 	
 	@EventHandler(priority = EventPriority.NORMAL) 
